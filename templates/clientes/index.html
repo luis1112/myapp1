@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+    <a style="margin-top: 2%; margin-bottom: 3%; margin-left: 5%;" href="{% url 'crear_clientes' %}" class="btn btn-primary">NUEVO CLIENTE</a>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">    
+</head>
+<body>
+    <form method="POST">{% csrf_token %}
+        <input name="busqueda" placeholder="INGRESE SU BUSQUEDA">
+        <button type="submit">Busca</button>
+    </form>
+    <table class="table table-striped">
+        <thead class="table-dark" >
+            <tr>
+                <th>Cedula</th>
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Correo</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for Cliente in listaClientes %}
+            <tr>
+                <td><a href="{%url 'modificar_Clientes' Cliente.cedula%}">{{Cliente.cedula}}</a></td>
+                <td>{{Cliente.apellidos}}</td>
+                <td>{{Cliente.nombres}}</td>
+                <td>{{Cliente.correo}}</td>
+                <td><a href="{%url 'cuentas' Cliente.cedula%}">CUENTAS</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
